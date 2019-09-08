@@ -1,0 +1,31 @@
+<?xml version = "1.0"?>
+<project name= "scantime" default="usage" basedir=".">
+
+	<target name="usage">
+		<echo>ANT build compiles the target file or files.</echo>
+		<echo>ANT clean removes any and all class files.</echo>
+		<echo>ANT run runs the target program or programs after compilation.</echo>
+	</target>
+
+	<target name="build">
+		<echo>This is ANT build</echo>
+		<javac includeantruntime="false" srcdir="." destdir="." />
+	</target>
+
+	<target name="clean">
+		<echo>This is ANT clean</echo>
+		<delete>
+			<fileset dir="." includes="**/*.class"/>
+		</delete>
+	</target>
+
+	<target name="run" depends="build">
+		<echo>This is ANT run</echo>
+
+		<java classname="Scan">
+			<arg value="10" />
+			<arg value="This is ANT" />
+		</java>
+
+	</target>
+</project>
