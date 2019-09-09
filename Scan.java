@@ -18,7 +18,7 @@ public class Scan {
         public static Integer Command;
         public static void main (String[]args) {//The main method.
                 String line = null;
-                //Searches for whatever file you entered along whatever file path you requested. Note that the file path and the file type are necessary inputs.
+                //Searches for whatever file you entered along whatever file path you requested. Note that the file type is a necessary input.
                 System.out.println("Enter the complete name of the file that you want scanned including the file type.");
                 Scanner file  = new Scanner(System.in);
                 String FilePath = file.nextLine();
