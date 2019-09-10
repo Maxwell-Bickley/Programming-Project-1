@@ -18,17 +18,14 @@ import java.util.regex.*;
 public class Printer
 {
         //Several variables were declared outside the main method for added flexibility in sharing the output with other files.
-        public static Integer incrementer = 1;
-        public static Integer middleloop1 = 0;
-        public static Integer middleloop2 = 0;
+        public static Integer innerloop1 = 0;
+        public static Integer innerloop2 = 0;
         public static Integer increment1;
         public static Integer increment2;
         public static String convert1;
         public static String convert2;
         public static String placeholderA;
         public static String placeholderB;
-        public static String placeholderC;
-        public static String placeholderD;
         public static HashMap<Integer, String> lines1 = new HashMap<Integer, String>();
         public static HashMap<Integer, String> lines2 = new HashMap<Integer, String>();
         public static HashMap<String, Integer> amount1 = new HashMap<String, Integer>();
@@ -51,9 +48,9 @@ public class Printer
                         {
                                 //Transfers the pattern to two different HashMaps. Both are important for later use.
                                 convert1 = matchA.group();
-                                lines1.put(middleloop1, convert1);
-                                amount1.put(convert1, 1);
-                                middleloop1++;
+                                lines1.put(innerloop1, convert1);
+                                amount1.put(convert1, 0);
+                                innerloop1++;
                         }
                         //finds any pattern that matches an empty space, then "user", then another empty space, and then a word. A ; may also proceed the pattern.
                         Pattern patternB = Pattern.compile("\\;?\\suser\\s\\S+");
@@ -63,56 +60,33 @@ public class Printer
                         {
                                 //Performs the same function as the other while loop, but removes " user " from the patterns.
                                 convert2 = matchB.group();
-                                convert2 = matchB.group();
                                 convert2 = convert2.replaceAll(" user ","");
-                                lines2.put(middleloop2, convert2);
-                                amount2.put(convert2, 1);
-                                middleloop2++;
+                                lines2.put(innerloop2, convert2);
+                                amount2.put(convert2, 0);
+                                innerloop2++;
                         }
-                }
-                //the next structure removes any duplicate patterns within the line HashMaps.
-                for (int outside1 = 0; outside1 < lines1.size();outside1++)
-                {
-                        //The outer loop stores the string into a placeholder.
-                        placeholderA = (String)lines1.get(outside1);
-                        for (int inside1 = 0; inside1 < outside1; inside1++)
-                        {
-                                //The inner loop stores the string in a different placeholder, compares the two codes, and removes any duplciates.
-                                placeholderB = (String)lines1.get(inside1);
-                                if (placeholderA.equals(placeholderB) && ! placeholderA.equals(""))
-                                {
-                                        lines1.put(inside1, "");//Effectively removes the duplicate patterns.
-                                        //Tracks the duplicate patterns to show how many times a given patterns pops up.
-                                        incrementer = (Integer)amount1.get(placeholderA);
-                                        incrementer++;
-                                        amount1.put(placeholderA, incrementer);
-                                }
-                        }
-                        incrementer = 1;//Resets the incrementer for the next pattern.
-                }
-                //Repeats the comparison process for the second pattern. Everything is the same but with different variables and loop lengths.
-                for (int outside2 = 0; outside2 < lines2.size();outside2++)
-                {
-                        placeholderC = (String)lines2.get(outside2);
-                        for (int inside2 = 0; inside2 < outside2;inside2++)
-                        {
-                                placeholderD = (String)lines2.get(inside2);
-                                if (placeholderC.equals(placeholderD) && ! placeholderC.equals(""))
-                                {
-                                        lines2.put(inside2, "");
-                                        incrementer = (Integer)amount2.get(placeholderC);
-                                        incrementer++;
-                                        amount2.put(placeholderC, incrementer);
-                                }
-                        }
-                        incrementer = 1;
-                }
-                amount2.remove(";unknown");//Removes ;unknown from "; user unknown".
+                }     
+                amount2.remove(";unknown");//Removes ;unknown if "; user unknown" was picked up.
                 if (Command == 1) //If 1 is enteredin the second input, every unqiue string that matches the first pattern will be listed.
-                {
+                { 
+			//This loop exploits the fact that addresses can only have one of each ID name.
+			for (int compare1 = 0;compare1 < lines1.size();compare1++)
+			{
+				placeholderA = (String)lines1.get(compare1);
+				increment1 = (Integer)amount1.get(placeholderA);
+				if (increment1 != null) //Prevents a null value from occuring.
+				{
+                                        increment1++; //Tracks each time any given pattern match is found.
+                                        amount1.put(placeholderA, increment1);
+					if (increment1 > 1) //Removes duplicate entries after they have been recorded.
+					{
+						lines1.put(compare1, "");//Effectively removes the duplicate patterns.
+					}
+				}
+			}
                         for (int printline1 = 0; printline1 < lines1.size(); printline1++)
                         {
-                                String convert1 = (String)lines1.get(printline1);
+                                convert1 = (String)lines1.get(printline1);
                                 increment1 = (Integer)amount1.get(convert1);
                                 //halts the printing process if the output is null. This stops repeating patterns.
                                 if (increment1 != null)
@@ -123,6 +97,21 @@ public class Printer
                 }
                 if (Command == 2) //If 2 is entered in the second input, every unique string pattern that matches the second pattern will be listed.
                 {
+			//Repeats the comparison process for the second pattern. Everything is the same but with different variables and loop lengths.
+			for (int compare2 = 0;compare2 < lines2.size();compare2++)
+			{
+				placeholderB = (String)lines2.get(compare2);
+				increment2 = (Integer)amount2.get(placeholderB);
+				if (increment2 != null)
+				{
+                                        increment2++;
+                                        amount2.put(placeholderB, increment2);
+					if (increment2 > 1)
+					{
+						lines2.put(compare2, "");//Effectively removes the duplicate patterns.
+					}
+				}
+			}
                         for (int printline2 = 0; printline2 < lines2.size(); printline2++)
                         {
                                 String convert2 = (String) lines2.get(printline2);
@@ -135,14 +124,11 @@ public class Printer
                         }
                 }
                 //Here, middleloop is reused to find the total number of unique IDs.
-                middleloop1 = amount1.size();
-                middleloop2 = amount2.size();
+                innerloop1 = amount1.size();
+                innerloop2 = amount2.size();
                 //Prints out the number of lines parsed, the number of unique patterns found to match the first criteria, and the number of patterns found to matche the second criteria.
                 System.out.println((Part + 1)+ " Lines of the log file were parsed.");
-                System.out.println("There were " + middleloop1 + " unique IP Addresses in the log");
-                System.out.print("There were " + middleloop2 + " unique users in the log");
+                System.out.println("There were " + innerloop1 + " unique IP Addresses in the log");
+                System.out.print("There were " + innerloop2 + " unique users in the log");
         }
 }
-
-
-
