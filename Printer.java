@@ -32,8 +32,8 @@ public class Printer
         public static HashMap<String, Integer> amount2 = new HashMap<String, Integer>();
         public static void main(String[]args)
         {
-                Scan scan = new Scan(); //Declares Scanner so that some of its variables may be sent to this class.
-                //Collects variables from Scanner.
+                Scan scan = new Scan(); //Declares Scan so that some of its variables may be sent to this class.
+                //Collects variables from Scan.
                 Integer Command = scan.sender();
                 Integer Part = scan.sender2();
                 HashMap<Integer, String> lineholder = scan.sender3();
@@ -67,7 +67,7 @@ public class Printer
                         }
                 }     
                 amount2.remove(";unknown");//Removes ;unknown if "; user unknown" was picked up.
-                if (Command == 1) //If 1 is enteredin the second input, every unqiue string that matches the first pattern will be listed.
+                if (Command == 1) //If 1 is entered in the second input, every unqiue string that matches the first pattern will be listed.
                 { 
 			//This loop exploits the fact that HashMaps can only have one of each ID name.
 			for (int compare1 = 0;compare1 < lines1.size();compare1++)
