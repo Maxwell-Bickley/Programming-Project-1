@@ -1,7 +1,7 @@
 /**
 * This collects any given text from Scan, compares it using regular expressions, filters out repeating patterns, and tallies every time a unique pattern successfully matches the pattern$
 it is being compared to. Then, it stores them into a HashMap, can optionally extract and print the usernames and IP Addresses from the HashMap, and print the lines of code parsed along wit$
-unqiue IP Addresses and the number of unique unsernames.
+unqiue IP Addresses and the number of unique usernames.
 *@author Max Bickley
 *@version 1.0
 * Programming Project One
