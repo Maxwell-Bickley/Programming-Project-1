@@ -52,6 +52,7 @@ public class Scan {
                 catch (IOException ex) {
                         System.out.println("Could not read file " + FileName + "");
                 }
+                System.out.println("arg[1]==" + Command);
                 //Instantiates and references Printer. This effectively runs the Printer program.
                 Printer Printer = new Printer();
                 Printer.main(args);
