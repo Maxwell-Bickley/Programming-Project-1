@@ -1,5 +1,5 @@
 /**
-* This class reads any given test file and sends it to Printer, the class that outputs all  the equested information.
+* This class reads any given test file and sends it to Printer, the class that outputs all  the requested information.
 * @Author Max Bickley
 * @Programming Project One
 * CS322 - Compiler Construction
