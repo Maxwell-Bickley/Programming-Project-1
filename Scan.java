@@ -44,7 +44,7 @@ public class Scan {
                         Part = Part - 1; //Sets the part variable to the amount of values within the array.
                         bufferedread.close(); //Closes the file.
                 }
-                //Terminates the program and informs the user if the fule could not be located.
+                //Terminates the program and informs the user if the file could not be located.
                 catch(FileNotFoundException ex) {
                         System.out.println("Could not locate file " + FileName + "");
                 }
