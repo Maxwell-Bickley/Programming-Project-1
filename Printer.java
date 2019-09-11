@@ -67,7 +67,6 @@ public class Printer
                                 innerloop2++;
                         }
                 }     
-                amount2.remove(";unknown");//Removes ;unknown if "; user unknown" was picked up.
                 if (Command == 1) //If 1 is entered in the second input, every unqiue string that matches the first pattern will be listed.
                 { 
 			//This loop exploits the fact that HashMaps can only have one of each ID name.
