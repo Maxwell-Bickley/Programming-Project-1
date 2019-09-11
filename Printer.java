@@ -63,6 +63,7 @@ public class Printer
                                 convert2 = convert2.replaceAll(" user ","");
                                 lines2.put(innerloop2, convert2);
                                 amount2.put(convert2, 0);
+				amount2.remove(";unknown");//Removes ;unknown if "; user unknown" was picked up.
                                 innerloop2++;
                         }
                 }     
