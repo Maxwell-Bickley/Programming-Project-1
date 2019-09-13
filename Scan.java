@@ -19,7 +19,7 @@ public class Scan {
         public static void main (String[]args) {//The main method.
                 String line = null;
                 //Searches for whatever file you entered along whatever file path you requested. Note that the file type is a necessary input.
-                System.out.println("Enter the complete name of the file that you want scanned including the file type.");
+                System.out.println("Enter the complete name of the file that you want scanned including the file type. For example, .txt should be included for text files.");
                 Scanner file  = new Scanner(System.in);
                 String FilePath = file.nextLine();
                 File FileName = new File(FilePath);
