@@ -24,7 +24,7 @@ public class Scan {
                 String FilePath = file.nextLine();
                 File FileName = new File(FilePath);
                 //Runs the program in accordance to the user's input command.
-                System.out.println("Enter 1 to include a list of IP Addresses, 2 to include a list of usernames, and any other integer for the default output");
+                System.out.println("Enter 1 to include a list of IP Addresses, 2 to include a list of usernames, and any other integer for the default output.");
                 Scanner request = new Scanner (System.in);
                 String Order = request.nextLine();
                 Command = Integer.parseInt(Order);
